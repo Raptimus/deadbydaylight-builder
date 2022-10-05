@@ -8,11 +8,20 @@
     <Menu />
   </header>
 
-  <RouterView />
+  <RouterView class="background-opacity" />
 </template>
 
 <style lang="scss">
   body {
     margin: 0;
+    min-height: 100vh;
+    background-image: url('@/assets/images/dbd-background.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .background-opacity {
+    background-color: rgba($dbd-black, 0.35);
   }
 </style>

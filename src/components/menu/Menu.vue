@@ -7,33 +7,33 @@
 
 <template>
   <nav class="menu">
-    <RouterLink :to="ROUTES.HOME_ROUTE" class="link-home">
+    <RouterLink :to="ROUTES.HOME_ROUTE" class="menu__link__home">
       <img src="@/assets/logo/dbd-logo.png" alt="Dead By Daylight logo" />
     </RouterLink>
     <ul>
-      <li v-for="link in links" :key="link.label" class="menu-element">
-        <Icon v-if="link.icon" :icon="link.icon" :alt="link.alt" />
-        <RouterLink :to="link.route" class="menu-link">{{ link.label }}</RouterLink>
+      <li v-for="link in links" :key="link.label" class="menu__link">
+        <Icon v-if="link.icon" :icon="link.icon" :alt="link.alt" class="menu__link__icon" />
+        <RouterLink :to="link.route" class="menu__link__hyperlink--text">{{ link.label }}</RouterLink>
       </li>
     </ul>
   </nav>
 </template>
 
 <style lang="scss" scoped>
-  .link-home {
-    display: flex;
-    align-items: center;
-
-    img {
-      max-height: 80%;
-    }
-  }
-
   .menu {
     background: rgba($dbd-black, 0.85);
     height: 6rem;
     display: flex;
     justify-content: space-around;
+
+    .menu__link__home {
+      display: flex;
+      align-items: center;
+
+      img {
+        max-height: 80%;
+      }
+    }
 
     ul {
       display: flex;
@@ -41,18 +41,18 @@
       align-items: center;
       justify-content: space-around;
 
-      .menu-element {
+      .menu__link {
         display: flex;
         align-items: center;
         color: $dbd-white;
         list-style: none;
         padding: 0.5rem;
 
-        .icon {
+        &__icon {
           padding-right: 1rem;
         }
 
-        .menu-link {
+        &__hyperlink--text {
           color: $dbd-white;
           font-size: 1rem;
           text-decoration: none;
