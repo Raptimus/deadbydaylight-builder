@@ -1,14 +1,18 @@
 <script setup>
   defineProps({
     icon: {
-      type: Object,
+      type: String,
+      required: true
+    },
+    alt: {
+      type: String,
       required: true
     }
   })
 </script>
 
 <template>
-  <component :is="icon" class="icon"></component>
+  <img class="icon" :alt="alt" :src="`src/assets${icon}`" />
 </template>
 
 <style lang="scss" scoped>
