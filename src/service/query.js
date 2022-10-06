@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const query = async ({ url, method, headers = {}, data = {}, param = {} }) => {
   try {
-    const result = await axios({
+    const response = await axios({
       url,
       method,
       headers,
@@ -10,7 +10,7 @@ export const query = async ({ url, method, headers = {}, data = {}, param = {} }
       param
     })
 
-    return result.data
+    return response.data
   } catch (e) {
     console.error('Request failed', e)
   }

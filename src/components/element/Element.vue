@@ -17,7 +17,7 @@
     },
     color: {
       type: String,
-      default: '#A90E3B'
+      default: '$dbd-grey-deep'
     }
   })
 
@@ -25,16 +25,16 @@
 </script>
 
 <template>
-  <div class="addon" :style="styleVariables">
-    <div class="addon__container">
-      <img class="addon__icon" :src="iconSource" :alt="`${label} addon icon`" />
+  <div class="element" :style="styleVariables">
+    <div class="element__container">
+      <img class="element__icon" :src="iconSource" :alt="`${label} icon`" />
     </div>
-    <div class="addon__label">{{ label }}</div>
+    <div class="element__label">{{ label }}</div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-  .addon {
+  .element {
     display: flex;
     flex-direction: column;
     align-items: center;
