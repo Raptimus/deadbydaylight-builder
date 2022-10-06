@@ -41,12 +41,13 @@
 
 <style lang="scss" scoped>
   .perk {
-    height: auto;
-    width: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: auto;
+    width: auto;
+    padding: 0.5rem;
 
     &__wrapper {
       display: flex;
