@@ -1,7 +1,16 @@
-export const convertToKiller = ({ name, imgs: { portrait, store }, perks_ids, power }) => ({
+export const convertToKiller = ({
+  _id,
+  name,
+  imgs: { portrait, store },
+  perks_ids,
+  power,
+  code
+}) => ({
   name,
   portrait,
   store,
   perks_ids,
-  power
+  power,
+  id: _id,
+  code
 })

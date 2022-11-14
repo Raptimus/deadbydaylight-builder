@@ -1,25 +1,34 @@
 <script setup>
   import { ref, watch } from 'vue'
-  import Perk from '@/components/perk/Perk.vue'
-  import Element from '@/components/element/Element.vue'
-  import { deadByDaylightService } from '@/service/deadByDaylightService'
+  import { RouterLink } from 'vue-router'
+  import { useKillerStore } from '@/stores/killer'
 
   const SURVIVOR = 'survivor'
   const KILLER = 'killer'
 
-  const mode = ref(SURVIVOR)
-  const feeds = ref()
+  const killerStore = useKillerStore()
 
-  watch(mode, async (newMode) => {
-    if (newMode === SURVIVOR) {
-      // Fetch survivors, items, perks, addons
-    }
+  const mode = ref(KILLER)
 
-    if (newMode === KILLER) {
-      // Fetch killers, items, perks, addons
-      feeds.value = await deadByDaylightService.fetchKillers()
+  watch(
+    mode,
+    async (newMode) => {
+      // Clean Store
+      killerStore.$reset()
+
+      if (newMode === SURVIVOR) {
+        // Fetch survivors, items, perks, addons
+      }
+
+      if (newMode === KILLER) {
+        // Fetch killers, items, perks, addons
+        killerStore.fetchKillers()
+      }
+    },
+    {
+      immediate: true
     }
-  })
+  )
 </script>
 
 <template>
@@ -42,14 +51,26 @@
           @click="mode = SURVIVOR"
         />
       </div>
-
-      <Element label="Judith's Tombstone" @click="fetchAddons()" />
-      <!-- <Perk /> -->
     </div>
     <div class="builder__feeds">
-      <!-- <Perk v-for="n in 15" :key="n" /> -->
-      <div v-for="(feed, index) in feeds" :key="index">
-        <img :src="feed.portrait" :alt="feed.name" />
+      <div
+        class="builder__feed"
+        v-for="killer in killerStore.getKillers"
+        :key="killer.id"
+        :id="killer.id"
+      >
+        <RouterLink
+          class="builder__feed__link"
+          :to="{ name: 'killer', params: { id: killer.code } }"
+        >
+          <img class="builder__feed__portrait" :src="killer.portrait" :alt="killer.name" />
+          <img
+            class="builder__feed__fog-background"
+            src="@/assets/images/fog-black.png"
+            alt="fog"
+          />
+          <label class="builder__feed__name" :for="killer.id">{{ killer.name }}</label>
+        </RouterLink>
       </div>
     </div>
   </div>
@@ -87,9 +108,46 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-around;
+    }
 
-      .perk {
-        flex: 5 1 20%;
+    &__feed {
+      flex: 5 1 20%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      &__link {
+        color: $dbd-white;
+        position: relative;
+        width: 150px;
+        height: 210px;
+        display: flex;
+        justify-content: center;
+        align-items: end;
+      }
+
+      &__portrait {
+        position: absolute;
+        max-width: 150px;
+      }
+
+      &__fog-background {
+        position: absolute;
+        bottom: 15px;
+        left: 15px;
+        z-index: 1;
+        width: 120px;
+        opacity: 0.5;
+      }
+
+      &__name {
+        position: absolute;
+        bottom: 25px;
+        z-index: 2;
+        max-width: 80%;
+        word-break: break-word;
+        text-align: center;
       }
     }
   }
