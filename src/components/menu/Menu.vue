@@ -2,18 +2,20 @@
   import { RouterLink } from 'vue-router'
   import Icon from '@/components/Icon.vue'
   import { links } from '@/components/menu/config'
-  import { ROUTES } from '@/router'
+  import { HOME_ROUTE } from '@/views/home/routes'
 </script>
 
 <template>
   <nav class="menu">
-    <RouterLink :to="ROUTES.HOME_ROUTE" class="menu__link__home">
+    <RouterLink :to="HOME_ROUTE" class="menu__link__home">
       <img src="@/assets/logo/dbd-logo.png" alt="Dead By Daylight logo" />
     </RouterLink>
     <ul>
       <li v-for="link in links" :key="link.label" class="menu__link">
         <Icon v-if="link.icon" :icon="link.icon" :alt="link.alt" class="menu__link__icon" />
-        <RouterLink :to="link.route" class="menu__link__hyperlink--text">{{ link.label }}</RouterLink>
+        <RouterLink :to="link.route" class="menu__link__hyperlink--text">
+          {{ link.label }}
+        </RouterLink>
       </li>
     </ul>
   </nav>

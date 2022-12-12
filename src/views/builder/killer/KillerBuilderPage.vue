@@ -12,7 +12,6 @@
   watch(
     killerStore.getKiller,
     (newKiller) => {
-      console.log('newKiller', newKiller)
       if (!newKiller) {
         killerStore.fetchKiller(route.params.id)
       }
